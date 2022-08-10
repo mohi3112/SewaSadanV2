@@ -26,7 +26,7 @@ class GuestMaster extends Controller
         $RandomName =date('mdYHis').uniqid().".".$image->extension();
         $photoname = $request->file('photo')->getClientOriginalName();
         //$photopath = $request->file('photo')->store('public/images/guests');
-        $path = public_path('../storage/uploads/');
+        $path = public_path('/assets/images/uploads/guests/');
         $filename = $photoname;
 
         $img = Image::make($image->getRealPath());
@@ -51,7 +51,7 @@ class GuestMaster extends Controller
         $guest->Mobile	 = $request->mobile;
         $guest->Address = $request->address;
         $guest->City ="";
-        $guest->Photo = "../storage/uploads/".$RandomName;
+        $guest->Photo = "/assets/images/uploads/guests/".$RandomName;
         $res = $guest->save();
 
         $guestid =new IVault();
@@ -86,7 +86,7 @@ class GuestMaster extends Controller
         $RandomName =date('dmYHis').uniqid().".".$image->extension();
         $photoname = $request->file('secondphoto')->getClientOriginalName();
         //$photopath = $request->file('photo')->store('public/images/guests');
-        $path = public_path('../storage/uploads/');
+        $path = public_path('/assets/images/uploads/guests/');
         $filename = $photoname;
 
         $img = Image::make($image->getRealPath());
@@ -109,7 +109,7 @@ class GuestMaster extends Controller
         $guest->Mobile	 = $request->secondmobile;
         $guest->Address = $request->secondaddress;
         $guest->City ="";
-        $guest->Photo = "../storage/uploads/".$RandomName;
+        $guest->Photo = "/assets/images/uploads/guests/".$RandomName;
         $res = $guest->save();
 
         $guestid =new IVault();
@@ -171,5 +171,25 @@ class GuestMaster extends Controller
         { 
             $selectedid = IVault::where('SSID','=',$id)->first();
             return response()->json([ 'status' => 200 , 'selected' => $selectedid ]);
+        }
+        public function GetGuestDetails(request $request)
+        {
+            $ssid = request('ssid');
+            $mobile = request('mobile');
+            $idnumber = request('idnumber');
+
+            $query = Rooms::query();
+            $query = $query->select('id','RoomNo','BedNo','RoomType','RoomRent','CurrentStatus','CurrentGuest','BookingId','ArrivalTime','ValidUpto','RoomAssets','created_at','updated_at');
+            if($status!="") { $query = $query->where('CurrentStatus','=',$status);}
+            if($bedno!="") { $query = $query->where('BedNo','=',$bedno);}
+            if ($roomno!="") {$query = $query->where('RoomNo', '=',$roomno);}
+            if ($type!="") { $query = $query->where('RoomType', '=',$type);}    
+            if ($groupby!="") { $query = $query->groupBy($groupby);}
+    
+            $gtrooms = $query->get();
+           
+            $preferences = DB::table('preferences')->where('options','=','renew_period')->get();
+            return response()->json([ 'status' => 200 , 'VacantRooms' => $gtrooms , 'preferences' => $preferences ]);
+    
         }
 }

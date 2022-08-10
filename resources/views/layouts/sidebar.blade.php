@@ -19,35 +19,21 @@
                     </a>
                 </li>
 
-                <li class="menu-title mt-2">Apps</li>
-
-                <li>
-                    <a href="apps-calendar.html">
-                        <i class="mdi mdi-calendar"></i>
-                        <span> Calendar </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="apps-chat.html">
-                        <i class="mdi mdi-forum"></i>
-                        <span> Chat </span>
-                    </a>
-                </li>
+                <li class="menu-title mt-2">Rooms & Beds</li>
 
                 <li>
                     <a href="#email" data-bs-toggle="collapse">
                         <i class="mdi mdi-email"></i>
-                        <span> Email </span>
+                        <span> Rooms & Beds </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="email">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="email-inbox.html">Inbox</a>
+                                <a href="/addroom">Add Rooms </a>
                             </li>
                             <li>
-                                <a href="email-templates.html">Email Templates</a>
+                                <a href="/changerent">Change Rents</a>
                             </li>
                         </ul>
                     </div>
@@ -56,13 +42,13 @@
                 <li>
                     <a href="#sidebarTasks" data-bs-toggle="collapse">
                         <i class="mdi mdi-clipboard"></i>
-                        <span> Tasks </span>
+                        <span> Checkin </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarTasks">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="task-kanban-board.html">Kanban Board</a>
+                                <a href="/checkin">Room Checkin</a>
                             </li>
                             <li>
                                 <a href="task-details.html">Details</a>
@@ -96,24 +82,24 @@
                     </div>
                 </li>
 
-                <li class="menu-title mt-2">Custom</li>
+                <li class="menu-title mt-2">Store</li>
 
                 <li>
                     <a href="#sidebarAuth" data-bs-toggle="collapse">
                         <i class="mdi mdi-file-multiple"></i>
-                        <span> Auth Pages </span>
+                        <span> Store Manager </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAuth">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="auth-login.html">Log In</a>
+                                <a href="/add-Location-vendor">Add Location/Vendor</a>
                             </li>
                             <li>
-                                <a href="auth-register.html">Register</a>
+                                <a href="/add-stock-category">Add Stock Category</a>
                             </li>
                             <li>
-                                <a href="auth-recoverpw.html">Recover Password</a>
+                                <a href="/add-stock-asset">Add Stock Assets</a>
                             </li>
                             <li>
                                 <a href="auth-lock-screen.html">Lock Screen</a>

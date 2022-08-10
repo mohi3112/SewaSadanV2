@@ -100,30 +100,30 @@
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="Assets">
-                                            <table border="1" width="100%">
-                        <thead>
-                        <tr><th>Category ID</th><th>Category Name</th><th>Patent Category</th></tr>
-                        </thead>
-                        <tbody>
-                        @foreach($Assets as $item)
-                        <tr><td>{{$item->id}}</td><td>{{$item->Category}}</td><td>{{$item->ParentCategory}}</td></tr>
-                        @endforeach
-                        </tbody>
-                       </table>
+                                                <table border="1" width="100%">
+                                                    <thead>
+                                                    <tr><th>Category ID</th><th>Category Name</th><th>Patent Category</th></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($Assets as $item)
+                                                    <tr><td>{{$item->id}}</td><td>{{$item->Category}}</td><td>{{$item->ParentCategory}}</td></tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
                                         
                                         
                                             </div>
                                             <div class="tab-pane show" id="Consumable">
-                                            <table border="1" width="100%">
-                        <thead>
-                        <tr><th>Category ID</th><th>Category Name</th><th>Patent Category</th></tr>
-                        </thead>
-                        <tbody>
-                        @foreach($Consumable as $item)
-                        <tr><td>{{$item->id}}</td><td>{{$item->Category}}</td><td>{{$item->ParentCategory}}</td></tr>
-                        @endforeach
-                        </tbody>
-                       </table>  
+                                                <table border="1" width="100%">
+                                                    <thead>
+                                                    <tr><th>Category ID</th><th>Category Name</th><th>Patent Category</th></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($Consumable as $item)
+                                                    <tr><td>{{$item->id}}</td><td>{{$item->Category}}</td><td>{{$item->ParentCategory}}</td></tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>  
                                         
                                             </div>
                                             

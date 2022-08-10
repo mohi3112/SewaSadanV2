@@ -88,7 +88,7 @@
                                     
                                     <?php if(isset($currentguest['Photo'])) 
                                     {
-                                        ?> <img src="#" height="100px" width="auto"> <?php 
+                                        ?> <img src="{{ asset($currentguest['Photo'])}}" height="100px" width="auto"> <?php 
                                     } 
                                     else
                                     { ?>

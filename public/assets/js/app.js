@@ -613,11 +613,11 @@ function ($) {
             case "dark": {
                 this.body.prepend("")
                 this.body.css({'visibility': 'hidden', 'opacity': 0});
-                this.defaultBSStyle.attr("disabled", true);
-                this.defaultAppStyle.attr("disabled", true);
+                this.defaultBSStyle.attr("disabled", false);
+                this.defaultAppStyle.attr("disabled", false);
 
-                this.darkBSStyle.attr("disabled", false);
-                this.darkAppStyle.attr("disabled", false);
+                this.darkBSStyle.attr("disabled", true);
+                this.darkAppStyle.attr("disabled", true);
 
                 setTimeout(function() {
                     self.body.css({'visibility': 'visible', 'opacity': 1});

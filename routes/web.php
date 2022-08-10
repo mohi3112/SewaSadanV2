@@ -8,6 +8,7 @@ use App\Http\Controllers\CheckinMaster;
 use App\Http\Controllers\StoreMaster;
 use App\Http\Controllers\GuestMaster;
 use App\Http\Controllers\VisitMaster;
+use App\Http\Controllers\PrintMaster;
 use App\Http\Controllers\Guests;
 use App\Http\Controllers\IVault;
 
@@ -26,10 +27,9 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-/////////////////////////////////////////////////////////////////
-
+/////////////////////Misc//////////////////////////////////////
 Route::get('/configs', [Preferences::class, 'GetAllConfigs']);
-
+Route::get('/print-slips', [PrintMaster::class, 'PrintSlips']);
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
@@ -74,3 +74,4 @@ Route::post('/add-new-asset', [StoreMaster::class, 'AddNewAsset'])->name('add-ne
 ///////////////////////////////////Visits/////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 Route::post('/visit-entry', [VisitMaster::class, 'VisitEntry'])->name('visit-entry')->middleware('isLogedIn');
+Route::get('/get-visit-details', [VisitMaster::class, 'GetVisitDetails']);

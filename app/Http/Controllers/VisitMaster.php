@@ -18,14 +18,14 @@ class VisitMaster extends Controller
 {
     public function VisitEntry(Request $request)
     {
-        $result = (new Preferences)->GetAllConfigs();
-        $person = json_decode($result->content());
-        $renew_period = $person->FinYear[0]->values;
-        $FinYear = $person->FinYear[1]->values; 
+        $prefrences = (new Preferences)->GetAllConfigs();
+        $data = json_decode($prefrences->content());
+        $renew_period = $data->FinYear[0]->values;
+        $FinYear = $data->FinYear[1]->values; 
         //dd($person);
 
 
-        $slipcheck = DB::table('visits_masters')->where('SlipNo','!=','')->orderBy('SlipNo', 'desc')->first();
+        $slipcheck = DB::table('visits_masters')->where('SlipNo','!=','')->orderBy('id', 'desc')->first();
         if($slipcheck==null)
         {
             $SlipNo=1;
@@ -69,7 +69,7 @@ class VisitMaster extends Controller
 
             $store = new Beddings;
             $store->BookingID = $BookingId;
-            $store->SSID = $CheckinDate;
+            $store->SSID = $request->SSID;
             $store->SlipNo = $SlipNo;
             $store->GuestName = $request->GuestName;
             $store->FatherName = $request->FatherName;
@@ -94,7 +94,7 @@ class VisitMaster extends Controller
                 $admitdate = date('d-m-Y', strtotime($vardate));
                 $visit = new Visits;
                 $visit->SSID = $request->SecSSID;
-                $visit->BookingId = $BookingId."/2";
+                $visit->BookingId = $BookingId."-2";
                 $visit->GuestName = $Second->Name;
                 $visit->FatherName = $Second->FatherName;
                 $visit->Mobile = $Second->Mobile;
@@ -113,8 +113,8 @@ class VisitMaster extends Controller
                 $Person2=$visit->save();
 
                 $store2 = new Beddings;
-                $store2->BookingID = $BookingId."/2";
-                $store2->SSID = $CheckinDate;
+                $store2->BookingID = $BookingId."-2";
+                $store2->SSID = $request->SecSSID;
                 $store2->SlipNo = $SlipNo;
                 $store2->GuestName = $Second->Name;
                 $store2->FatherName = $Second->FatherName;
@@ -133,10 +133,36 @@ class VisitMaster extends Controller
 
             }
 
-
+    $printurl="print-slips?bookingid=".$BookingId."&slipno=".$NewSlip."&ssid1=".$request->SSID."&ssid2=".$request->SecSSID;
+    return redirect($printurl);
 
 
     }
       
     
+    public function GetVisitDetails(Request $request)
+    {
+        $booking = request('bookingid');
+        $mobile = request('mobile');
+        $slip = request('slipno');
+        $voucher = request('voucher');
+        $from = request('from');
+        $to = request('to');
+        
+
+        $query = Visits::query();
+        $query = $query->select('id','BookingID','SSID','GuestName','FatherName','Mobile','IDNumber','PatientName','MRDNO','PatientAdmtDate','Room','Bed','RoomType','CheckinDate','CheckinBy','SlipNo','Security','Status','VoucherNo','Refund','CheckoutDate','CheckoutBy','Donation','DonationNo','BeddingStatus','BeddingIssueDate','BeddingIssuedBy','BeddingReturnDate','BeddingRetunedBy');
+        if($booking!="") { $query = $query->where('BookingID','=',$booking);}
+        if($mobile!="") { $query = $query->where('Mobile','=',$mobile);}
+        if ($from!="") {$query = $query->where('CheckinDate', '=',$from);}
+        if ($to!="") { $query = $query->where('CheckoutDate', '=',$to);}  
+        if ($slip!="") {$query = $query->where('SlipNo', '=',$slip);}
+        if ($voucher!="") { $query = $query->where('VoucherNo', '=',$voucher);}    
+        // if ($groupby!="") { $query = $query->groupBy($groupby);}
+        $getvisit = $query->get();
+
+        return response()->json([ 'status' => 200 , 'VisitDetails' => $getvisit , 'preferences' => 'test' ]);
+
+        
+    }
 }
