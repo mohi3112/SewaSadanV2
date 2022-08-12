@@ -74,6 +74,19 @@ class GuestMaster extends Controller
 
     public function CreateSecondGuest(Request $request)
     {
+        
+        $gcheck = DB::table('guests')->orderBy('id', 'desc')->first();
+        
+        if($gcheck==null)
+        {
+            $secondssid=1;
+        }
+        else
+        {
+            $secondssid =$gcheck->SSID;
+            $secondssid++;  
+        }
+
         $request->validate([
             'secondguestname' => 'required',
             'secondfnwo' => 'required',
@@ -92,18 +105,9 @@ class GuestMaster extends Controller
         $img = Image::make($image->getRealPath());
             $img->resize(300, 400)->save($path.$RandomName);
         $gcheck = DB::table('guests')->orderBy('id', 'desc')->first();
-        if($gcheck==null)
-        {
-            $ssid=1;
-        }
-        else
-        {
-            $ssid =$gcheck->SSID;
-            $ssid++;  
-        }
-
+        
         $guest =new Guests();
-        $guest ->SSID = $ssid;
+        $guest ->SSID = $secondssid;
         $guest->Name = $request->secondguestname;
         $guest->FatherName = $request->secondfnwo;
         $guest->Mobile	 = $request->secondmobile;
@@ -113,7 +117,7 @@ class GuestMaster extends Controller
         $res = $guest->save();
 
         $guestid =new IVault();
-        $guestid ->SSID = $ssid;
+        $guestid ->SSID = $secondssid;
         $guestid->Name = $request->secondguestname;
         $guestid->Mobile = $request->secondmobile;
         $guestid->DrivingLicence = Null;
@@ -124,11 +128,13 @@ class GuestMaster extends Controller
         $guestid->GovtID = Null;
         $guestid->Others = Null;
         $res = $guestid->save();
+
+        $request->session()->put('SecondGuest', $secondssid);
         if($res)
               {
                 
                 Alert::success('Second Person Saved!', 'Page Is Refreshed Please Select ID Type Again');
-                  return back()->with('SecondSsid',$ssid)->with('success','Second Person Info Saved!!!');
+                  return back()->with('SecondSsid',$secondssid)->with('success','Second Person Info Saved!!!');
               }
               else
               {

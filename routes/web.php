@@ -70,6 +70,7 @@ Route::post('/add-vendor', [StoreMaster::class, 'AddVendor'])->name('add-vendor'
 Route::post('/add-location', [StoreMaster::class, 'AddLocation'])->name('add-location')->middleware('isLogedIn');
 Route::post('/add-category', [StoreMaster::class, 'AddCategory'])->name('add-category')->middleware('isLogedIn');
 Route::post('/add-new-asset', [StoreMaster::class, 'AddNewAsset'])->name('add-new-asset')->middleware('isLogedIn');
+Route::get('/issue-beddings', [StoreMaster::class, 'IssueBedding']);
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////Visits/////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////

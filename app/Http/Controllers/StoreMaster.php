@@ -136,4 +136,9 @@ class StoreMaster extends Controller
         }
 
     }
+    public function IssueBedding()
+    {
+        return view("Store.Issubeddings");
+    }
+
 }

@@ -40,6 +40,7 @@ class PrintMaster extends Controller
                       ->join('beddings', 'guests.id', '=', 'beddings.SSID')
                       ->select('guests.*', 'visits.*', 'beddings.*')
                       ->where('visits.BookingID','=',$bookingsecond)
+                      ->where('visits.Security','=','0')
                       ->get();
 
         }
@@ -59,6 +60,7 @@ class PrintMaster extends Controller
                       ->join('beddings', 'guests.id', '=', 'beddings.SSID')
                       ->select('guests.*', 'visits.*')
                       ->where('visits.BookingID','=',$booking)
+                      ->where('visits.Security','!=','0')
                       ->get();
         }
 

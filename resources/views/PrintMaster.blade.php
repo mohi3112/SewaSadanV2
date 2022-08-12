@@ -132,12 +132,12 @@
                         <h4 align="center" style="color:#f00;"><b>SHRI RAM SHARNAM SEWA SADAN</b></h4>
                         <h6 align="center" style="color:#f00;margin-top:-9px;"><b>A Unit Of Ram Sewa Swami Satyanand Trust</b></h6>
                             <table align="center" style="width:91%;height:auto;padding:2px;">
-                                <tr><td width="20%">Date:</td><td width="35%">{{ \Carbon\Carbon::parse($first[0]->CheckinDate)->format('d/M/Y')}}</td><td rowspan="6" width="45%"><img align="right" src="{{$first[0]->Photo}}" height="125px" width="auto"></td></tr>
-                                <tr><td width="20%">Slip No:</td><td>{{$first[0]->SlipNo}}</td></tr>
-                                <tr><td width="20%">Att Name:</td><td>{{$first[0]->GuestName}}</td></tr>
-                                <tr><td width="20%">F.N/W/o:</td><td>{{$first[0]->FatherName}}</td ></tr>
-                                <tr><td width="20%">Mobile:</td><td>{{$first[0]->Mobile}}</td></tr>
-                                <tr><td width="20%">Room/Bed:</td><td>{{$first[0]->Room}}/{{$first[0]->Bed}}</td ></tr>
+                                <tr><td width="20%">Date:</td><td width="35%">{{ \Carbon\Carbon::parse($second[0]->CheckinDate)->format('d/M/Y')}}</td><td rowspan="6" width="45%"><img align="right" src="{{$first[0]->Photo}}" height="125px" width="auto"></td></tr>
+                                <tr><td width="20%">Slip No:</td><td>{{$FinYear}}/{{$second[0]->SlipNo}}</td></tr>
+                                <tr><td width="20%">Att Name:</td><td>{{$second[0]->GuestName}}</td></tr>
+                                <tr><td width="20%">F.N/W/o:</td><td>{{$second[0]->FatherName}}</td ></tr>
+                                <tr><td width="20%">Mobile:</td><td>{{$second[0]->Mobile}}</td></tr>
+                                <tr><td width="20%">Room/Bed:</td><td>{{$second[0]->Room}}/{{$second[0]->Bed}}</td ></tr>
                                 <tr><td colspan="3"><center>Valid For  {{$Ren_Period}}  Days Only.</center></td ></tr>
                             </table>
                     </div>
@@ -261,15 +261,15 @@
                                                 <div style="float:left;border-style: solid;width:100%;border-width: medium;">
                                                     <h4 align="center" style="color:#f00;"><b>SHRI RAM SHARNAM SEWA SADAN</b></h4>
                                                     <h6 align="center" style="color:#f00;margin-top:-9px;"><b>A Unit Of Ram Sewa Swami Satyanand Trust</b></h6>
-                                                        <table align="center" style="width:91%;height:auto;padding:2px;">
-                                                            <tr><td width="20%">Date:</td><td width="35%">{{ \Carbon\Carbon::parse($first[0]->CheckinDate)->format('d/M/Y')}}</td><td rowspan="6" width="45%"><img align="right" src="{{$first[0]->Photo}}" height="125px" width="auto"></td></tr>
-                                                            <tr><td width="20%">Slip No:</td><td>{{$first[0]->SlipNo}}</td></tr>
-                                                            <tr><td width="20%">Att Name:</td><td>{{$first[0]->GuestName}}</td></tr>
-                                                            <tr><td width="20%">F.N/W/o:</td><td>{{$first[0]->FatherName}}</td ></tr>
-                                                            <tr><td width="20%">Mobile:</td><td>{{$first[0]->Mobile}}</td></tr>
-                                                            <tr><td width="20%">Room/Bed:</td><td>{{$first[0]->Room}}/{{$first[0]->Bed}}</td ></tr>
-                                                            <tr><td colspan="3"><center>Valid For  {{$Ren_Period}}  Days Only.</center></td ></tr>
-                                                        </table>
+                                                    <table align="center" style="width:91%;height:auto;padding:2px;">
+                                                        <tr><td width="20%">Date:</td><td width="35%">{{ \Carbon\Carbon::parse($second[0]->CheckinDate)->format('d/M/Y')}}</td><td rowspan="6" width="45%"><img align="right" src="{{$first[0]->Photo}}" height="125px" width="auto"></td></tr>
+                                                        <tr><td width="20%">Slip No:</td><td>{{$FinYear}}/{{$second[0]->SlipNo}}</td></tr>
+                                                        <tr><td width="20%">Att Name:</td><td>{{$second[0]->GuestName}}</td></tr>
+                                                        <tr><td width="20%">F.N/W/o:</td><td>{{$second[0]->FatherName}}</td ></tr>
+                                                        <tr><td width="20%">Mobile:</td><td>{{$second[0]->Mobile}}</td></tr>
+                                                        <tr><td width="20%">Room/Bed:</td><td>{{$second[0]->Room}}/{{$second[0]->Bed}}</td ></tr>
+                                                        <tr><td colspan="3"><center>Valid For  {{$Ren_Period}}  Days Only.</center></td ></tr>
+                                                    </table>
                                                 </div>
                                             </div>
 

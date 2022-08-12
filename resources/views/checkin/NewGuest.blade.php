@@ -63,7 +63,7 @@
                                     <div class="col-md-8">
                                     <lable for="IDProof"> ID Proof:</lable>
                                     <select name="IDProof" id="IDProof"  class="form-control" >
-                                    <option value="NotSelected" selected="selected">Select An ID Type</option>
+                                    <option value="NotSelected">Select An ID Type</option>
                                        <?php if(isset($idvault)){ ?>
                                         <?php if($idvault['DrivingLicence']!="") { ?><option value="{{$idvault['DrivingLicence']}}">Driving Licence => {{$idvault['DrivingLicence']}}</option><?php } ?>
                                         <?php if($idvault['AadharCard']!="") { ?><option value=" {{$idvault['AadharCard']}}">Aadhar Card => {{$idvault['AadharCard']}}</option><?php } ?>
@@ -164,19 +164,19 @@
                 <span class="text-danger">@error('Security') {{$message}}  @enderror</span>
                 </div>
                 <!-- Other Inputs -->
-                <input type="text" name="GuestName" id="GuestName" value="<?php if(isset($currentguest)) { echo $currentguest['Name'];}else{?> {{  old('GuestName') }} <?php } ?> "class="form-control">
-                <input type="text" name="FatherName" id="FatherName" class="form-control" value="<?php if(isset($currentguest)) { echo $currentguest['FatherName'];}else{?> {{  old('FatherName') }} <?php } ?> ">
-                <input type="text" name="SSID" id="SSID" class="form-control" value="<?php if(isset($currentguest)) { echo $currentguest['SSID'];}else{?> {{  old('SSID') }} <?php } ?>  ">
-                <input type="text" name="RoomType" id="RoomType" class="form-control" value="{{  old('RoomType') }}" >
-                <input type="text" name="CreatedBy" id="CreatedBy" value="{{ $x['UserName']}}" class="form-control" >
-                <input type="text" name="IDNumber" id="IDNumber" class="form-control" value="{{  old('IDNumber') }}">
-                <input type="text" name="Mobile" id="Mobile" value="<?php if(isset($currentguest)) { echo $currentguest['Mobile'];}else{?> {{  old('Mobile') }} <?php } ?>" class="form-control" >
+                <input type="hidden" name="GuestName" id="GuestName" value="<?php if(isset($currentguest)) { echo $currentguest['Name'];}else{?> {{  old('GuestName') }} <?php } ?> "class="form-control">
+                <input type="hidden" name="FatherName" id="FatherName" class="form-control" value="<?php if(isset($currentguest)) { echo $currentguest['FatherName'];}else{?> {{  old('FatherName') }} <?php } ?> ">
+                <input type="hidden" name="SSID" id="SSID" class="form-control" value="<?php if(isset($currentguest)) { echo $currentguest['SSID'];}else{?> {{  old('SSID') }} <?php } ?>  ">
+                <input type="hidden" name="RoomType" id="RoomType" class="form-control" value="{{  old('RoomType') }}" >
+                <input type="hidden" name="CreatedBy" id="CreatedBy" value="{{ $x['UserName']}}" class="form-control" >
+                <input type="hidden" name="IDNumber" id="IDNumber" class="form-control" value="{{  old('IDNumber') }}">
+                <input type="hidden" name="Mobile" id="Mobile" value="<?php if(isset($currentguest)) { echo $currentguest['Mobile'];}else{?> {{  old('Mobile') }} <?php } ?>" class="form-control" >
                 </div>
                
                 <div class="row mb-3">
                     <label for="inputPassword3" class="col-3 col-xl-3 col-form-label"> <center>Second Person:</center> </label>
                     <div class="col-3 col-md-3">
-                    <input type="text" name="SecSSID" id="SecSSID" value="{{Session::get('SecondSsid')}}" class="form-control">
+                    <input type="text" name="SecSSID" id="SecSSID" value="@if(Session::has('SecondGuest')){{ Session::get('SecondGuest')}} @endif" class="form-control">
                      </div>
                      <div class="col-6 col-md-6">
                     <button type="submit" id="checkinbutton" class="btn btn-primary" ></button> </div>
@@ -363,6 +363,7 @@
 <script>
    
     $(document).ready(function(){
+
 //////////////////////Fetch Rooms By API Call////////////////////////////
 $.ajax({  type : "GET" , url : "/get-all-rooms?status=vacant&groupby=roomno" ,success:function(response){ console.log(response);
     $.each(response.VacantRooms, function(key,value){ $("#RoomNo").append("<option value=" + value.RoomNo +">"+value.RoomNo+"    =>   "+value.RoomType+"</option>");  });
@@ -372,7 +373,7 @@ $.ajax({  type : "GET" , url : "/get-all-rooms?status=vacant&groupby=roomno" ,su
 $("#RoomNo").change(function() {    var sroom =$( "#RoomNo :selected").val();  
 
 $.ajax({  type : "GET" , url : "/get-all-rooms?status=vacant&roomno="+sroom ,success:function(response){ console.log(response);
-$("#BedNo").empty();
+$('#BedNo').find('option').not(':first').remove();
 $.each(response.VacantRooms, function(key,value){ $("#BedNo").append("<option value=" + value.BedNo +">"+value.BedNo+"</option>");  });
 }     })
 
@@ -383,7 +384,7 @@ $("#IDProof").change(function() {    var selectedID =$( "#IDProof :selected").va
 });
 
 ///////////////////////Beds Fetched//////////////////////////////////
-/////////////////////Fetch Beds Rent By API Call///////////////////////////
+/////////////////////Fetch Beds Rent By API Call/////////////////////
 $("#BedNo").change(function() {    var sroom =$( "#RoomNo :selected").val(); var sbed = $("#BedNo :selected").val();  
 $.ajax({  type : "GET" , url : "/get-all-rooms?status=vacant&roomno="+sroom+"&bedno="+sbed ,success:function(response){ console.log(response);
     $('#RoomRent').val(response.VacantRooms[0].RoomRent);
