@@ -136,10 +136,22 @@ class StoreMaster extends Controller
         }
 
     }
-    public function StoreBedding()
+    public function StoreBedding(Request $request)
     {
-        $pending = DB::table('beddings')->groupBy('SlipNo')->get();
-        return view("Store.Issubeddings")->with('pending',$pending);
+        $sid = request('slip');
+        //if(isset($sid)){}
+        if(isset($sid))
+        {
+            $slipdata = DB::table('beddings')->where('SlipNo','>',$sid)->groupBy('SlipNo')->get();
+            return view("Store.Issubeddings")->with('SlipData',$slipdata);
+        }
+        else
+        {
+            $pending = DB::table('beddings')->groupBy('SlipNo')->get();
+            return view("Store.Issubeddings")->with('pending',$pending);
+        }
+       
     }
+    
 
 }

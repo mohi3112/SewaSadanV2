@@ -13,30 +13,30 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xl-12">
-            
+            @if(!isset($SlipData))
                 <div class="card">
                     <div class="body">
 
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
-                            <tr>
-                                <th>Guest Name</th>
-                                <th>Slip No</th>
-                                <th>Room/Bed</th>
-                                <th>Arrival Date</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($pending as $row)
-                        <tr><th>{{$row->GuestName}}</th><th>{{$row->SlipNo}}</th><th>{{$row->Room}}/{{$row->Bed}}</th><th>{{$row->created_at}}</th><th><a href="/issue-beddings/{{$row->SlipNo}}">Issue Beddings</a></th></tr>
-                        @endforeach
-                               
-                            </tbody>
-                        </table>
-                    </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Guest Name</th>
+                                        <th>Slip No</th>
+                                        <th>Room/Bed</th>
+                                        <th>Arrival Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($pending as $row)
+                                    <tr><th>{{$row->GuestName}}</th><th>{{$row->SlipNo}}</th><th>{{$row->Room}}/{{$row->Bed}}</th><th>{{$row->created_at}}</th><th><a href="/store-beddings?slip={{$row->SlipNo}}">Issue Beddings</a></th></tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                 </div> 
+            @endif
             </div>
 
 
@@ -52,23 +52,7 @@
 @csrf
 <div class="row">
     <div class="col-md-12">
-<table width=80% border=1 align="center">
-    <tr>
-    <td>Slip NO:<input type="text" name="SlipNo" value="{{Session::get('FinYear')}}/"></td>
-    <td><input type="text" name="GuestName"></td>
-    <td rowspan="3"><img height="100px" width="auto" src="/assets/images/uploads/guests/0814202217493962f8e85bdde43.png" alt=""></td>
-    </tr>
-    <tr>
-    <td>Father's Name</td>
-    <td><input type="text" name="Room/Bed"></td>
-    </tr>
-</table>
-  
-    
 
-        <div class="mb-3">
-            <input type="submit" name="saveasset" id="saveasset" value="Create Asset">       
-         </div>
 
 
     </div>
