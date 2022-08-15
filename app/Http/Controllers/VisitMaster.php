@@ -60,17 +60,6 @@ class VisitMaster extends Controller
         //dd($visit);
         $person1=$visit->save();
 
-        $store = new Beddings;
-        $store->BookingID = $BookingId;
-        $store->SSID = $request->SSID;
-        $store->SlipNo = $SlipNo;
-        $store->GuestName = $request->GuestName;
-        $store->FatherName = $request->FatherName;
-        $store->Room =  $request->RoomNo;
-        $store->Bed = $request->BedNo;
-        $store->RoomType =  $request->RoomType;
-        $personbedding=$store->save();
-
         $RoomStatus = Rooms::where('RoomNo','=',$request->RoomNo)->where('BedNo','=','1')->first();
         $RoomStatus->CurrentStatus = "Occupied";
         $RoomStatus->CurrentGuest = $request->GuestName;
@@ -104,17 +93,6 @@ class VisitMaster extends Controller
             $visit->Status = "Checked-In";
             $visit->BeddingStatus = "Pending";
             $Person2=$visit->save();
-
-            $store2 = new Beddings;
-            $store2->BookingID = $BookingId."-2";
-            $store2->SSID = $request->SecSSID;
-            $store2->SlipNo = $SlipNo;
-            $store2->GuestName = $Second->Name;
-            $store2->FatherName = $Second->FatherName;
-            $store2->Room =  $request->RoomNo;
-            $store2->Bed = $request->BedNo;
-            $store2->RoomType =  $request->RoomType;
-            $person2bedding=$store2->save();
 
             $RoomStatus = Rooms::where('RoomNo','=',$request->RoomNo)->where('BedNo','=','2')->first();
             $RoomStatus->CurrentStatus = "Occupied";

@@ -51,7 +51,7 @@
 
                         <!-- end row -->
                         <div id="" style="overflow:scroll; height:400px;">
-                       <table border="1" width="100%">
+                       <table border="1" width="100%" class="table table-hover mb-0">
                         <thead>
                         <tr><th>Location ID</th><th>Location</th><th>CreatedBy</th><th>CreatedAt</th></tr>
                         </thead>
@@ -106,7 +106,7 @@
 
                         <!-- end row -->
                         <div id="" style="overflow:scroll; height:400px;">
-                       <table border="1" width="100%">
+                       <table border="1" width="100%"  class="table table-hover mb-0">
                         <thead>
                         <tr><th>Vendor ID</th><th>Vendor</th><th>CreatedBy</th><th>CreatedAt</th></tr>
                         </thead>

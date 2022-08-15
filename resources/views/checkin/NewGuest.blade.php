@@ -39,8 +39,12 @@
                                     </div>
                                     <div class="mb-3">
                                     <lable for="mobile"> Mobile:</lable>
-                                    <input type="text" maxlength="10" name="mobile" class="form-control" <?php if(isset($currentguest)) {  echo "readonly=readonly";} ?> value="<?php if(isset($currentguest)) { echo $currentguest['Mobile'];} else { ?>{{  old('mobile') }} <?php } ?>">
+                                    <input type="text" id="mobileno" maxlength="10" name="mobile" class="form-control" value="<?php if(isset($currentguest)) { echo $currentguest['Mobile'];} else { ?>{{  old('mobile') }} <?php } ?>">
                                     <span class="text-danger">@error('mobile') {{$message}}  @enderror</span>
+                                    </div>
+                                    <div id="MobileSearch" style="display:none;">
+                                    
+                                
                                     </div>
                                     <div class="mb-3">
                                     <lable for="address"> Address:</lable>
@@ -361,9 +365,47 @@
 @section('scripts')
 
 <script>
-   
+let textbox = document.querySelector('#mobileno');
+let header = document.querySelector('#MobileSearch');
+
+// add event listeners to textbox
+textbox.addEventListener('focus', function() { 
+    toggleDisplay(header, true);
+});
+textbox.addEventListener('blur', function() { 
+    toggleDisplay(header, true);
+});
+
+function toggleDisplay(element, show) {
+    if (show) 
+        element.style.display = 'block';
+    else
+        element.style.display = 'none';
+}
+
+
     $(document).ready(function(){
 
+        fetch_guest_mobile();
+
+function fetch_guest_mobile(query = '')
+{
+ $.ajax({
+  url:"/guest-phone",
+  method:'GET',
+  data:{query:query},
+  dataType:'json',
+  success:function(data)
+  {
+   $('#MobileSearch').html(data.table_data);
+  }
+ })
+}
+
+$(document).on('keyup', '#mobileno', function(){
+ var query = $(this).val();
+ fetch_guest_mobile(query);
+});
 //////////////////////Fetch Rooms By API Call////////////////////////////
 $.ajax({  type : "GET" , url : "/get-all-rooms?status=vacant&groupby=roomno" ,success:function(response){ console.log(response);
     $.each(response.VacantRooms, function(key,value){ $("#RoomNo").append("<option value=" + value.RoomNo +">"+value.RoomNo+"    =>   "+value.RoomType+"</option>");  });

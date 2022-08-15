@@ -102,7 +102,7 @@
                                 <a href="/add-stock-asset">Add Stock Assets</a>
                             </li>
                             <li>
-                                <a href="auth-lock-screen.html">Lock Screen</a>
+                                <a href="/store-beddings">Issue Beddings</a>
                             </li>
                             <li>
                                 <a href="auth-confirm-mail.html">Confirm Mail</a>

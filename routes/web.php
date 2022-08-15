@@ -11,6 +11,7 @@ use App\Http\Controllers\VisitMaster;
 use App\Http\Controllers\PrintMaster;
 use App\Http\Controllers\Guests;
 use App\Http\Controllers\IVault;
+use App\Http\Controllers\LiveSearch;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,9 +71,16 @@ Route::post('/add-vendor', [StoreMaster::class, 'AddVendor'])->name('add-vendor'
 Route::post('/add-location', [StoreMaster::class, 'AddLocation'])->name('add-location')->middleware('isLogedIn');
 Route::post('/add-category', [StoreMaster::class, 'AddCategory'])->name('add-category')->middleware('isLogedIn');
 Route::post('/add-new-asset', [StoreMaster::class, 'AddNewAsset'])->name('add-new-asset')->middleware('isLogedIn');
-Route::get('/issue-beddings', [StoreMaster::class, 'IssueBedding']);
+Route::get('/store-beddings', [StoreMaster::class, 'StoreBedding']);
+Route::get('/issue-beddings{id?}', [StoreMaster::class, 'IssueBedding']);
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////Visits/////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 Route::post('/visit-entry', [VisitMaster::class, 'VisitEntry'])->name('visit-entry')->middleware('isLogedIn');
 Route::get('/get-visit-details', [VisitMaster::class, 'GetVisitDetails']);
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////Live Search/////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+Route::get('/guest-details', [LiveSearch::class, 'GetGuestDetails']);
+Route::get('/guest-phone', [LiveSearch::class, 'GetGuestPhone']);

@@ -42,4 +42,30 @@
         <!-- App js-->
         <script src="{{ asset('assets/js/app.min.js')}}"></script> 
         <script src="{{ asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+        
+<script>
+$(document).ready(function(){
+
+fetch_guest_data();
+function fetch_guest_data(query = '')
+{
+ $.ajax({
+  url:"/guest-details",
+  method:'GET',
+  data:{query:query},
+  dataType:'json',
+  success:function(data)
+  {
+   $('#user-list-ajax').html(data.table_data);
+  }
+ })
+}
+
+$(document).on('keyup', '#top-search', function(){
+ var query = $(this).val();
+ fetch_guest_data(query);
+});
+});
+</script>
+
 @yield('scripts')

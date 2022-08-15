@@ -136,9 +136,10 @@ class StoreMaster extends Controller
         }
 
     }
-    public function IssueBedding()
+    public function StoreBedding()
     {
-        return view("Store.Issubeddings");
+        $pending = DB::table('beddings')->groupBy('SlipNo')->get();
+        return view("Store.Issubeddings")->with('pending',$pending);
     }
 
 }

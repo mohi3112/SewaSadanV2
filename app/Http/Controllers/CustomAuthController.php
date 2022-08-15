@@ -29,7 +29,13 @@ class CustomAuthController extends Controller
         {
            if(Hash::check($request->password,$user->Password))
            {
+            $prefrences = (new Preferences)->GetAllConfigs();
+            $data = json_decode($prefrences->content());
+            $renew_period = $data->FinYear[0]->values;
+            $FinYear = $data->FinYear[1]->values; 
             $request->session()->put('loginId',$user->id);
+            $request->session()->put('FinYear',$FinYear);
+            $request->session()->put('RenewPeriod',$renew_period);
             return redirect('dashboard');
            }
            else
